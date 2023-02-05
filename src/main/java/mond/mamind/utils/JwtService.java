@@ -1,8 +1,7 @@
 package mond.mamind.utils;
 
-
-// import com.example.demo.config.BaseException;
-import mond.mamind.Secret;
+import mond.mamind.config.BaseException;
+import mond.mamind.config.secret.Secret;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -13,6 +12,9 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+
+import static mond.mamind.config.BaseResponseStatus.EMPTY_JWT;
+import static mond.mamind.config.BaseResponseStatus.INVALID_JWT;
 
 // import static com.example.demo.config.BaseResponseStatus.*;
 

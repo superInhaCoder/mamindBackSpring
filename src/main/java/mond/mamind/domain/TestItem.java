@@ -1,8 +1,8 @@
 package mond.mamind.domain;
 
-import jakarta.persistence.*;
 import lombok.Data;
-
+import javax.persistence.*;
+import java.time.LocalDateTime;
 @Data
 @Entity
 @Table
