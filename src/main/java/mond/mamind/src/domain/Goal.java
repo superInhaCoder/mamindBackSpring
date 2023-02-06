@@ -1,8 +1,7 @@
-package mond.mamind.domain;
+package mond.mamind.src.domain;
 
 import lombok.Data;
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Data
 @Entity

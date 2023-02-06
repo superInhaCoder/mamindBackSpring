@@ -1,5 +1,6 @@
 package mond.mamind.utils;
 
+
 import mond.mamind.config.BaseException;
 import mond.mamind.config.secret.Secret;
 import io.jsonwebtoken.Claims;
@@ -12,11 +13,9 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.UUID;
 
-import static mond.mamind.config.BaseResponseStatus.EMPTY_JWT;
-import static mond.mamind.config.BaseResponseStatus.INVALID_JWT;
-
-// import static com.example.demo.config.BaseResponseStatus.*;
+import static mond.mamind.config.BaseResponseStatus.*;
 
 @Service
 public class JwtService {
@@ -26,11 +25,11 @@ public class JwtService {
     @param userIdx
     @return String
      */
-    public String createJwt(int userIdx){
+    public String createJwt(UUID userIdx){
         Date now = new Date();
         return Jwts.builder()
                 .setHeaderParam("type","jwt")
-                .claim("userIdx",userIdx)
+                .claim("userId",userIdx)
                 .setIssuedAt(now)
                 .setExpiration(new Date(System.currentTimeMillis()+1*(1000*60*60*24*365)))
                 .signWith(SignatureAlgorithm.HS256, Secret.JWT_SECRET_KEY)
@@ -41,9 +40,9 @@ public class JwtService {
     클라이언트로 부터 온 Header에서 X-ACCESS-TOKEN 으로 JWT 추출
     @return String
      */
-    public String getJwt(){
+    public String getJwt() {
         HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
-        return request.getHeader("X-ACCESS-TOKEN");
+        return request.getHeader("Authorization");
     }
 
     /*
@@ -51,16 +50,21 @@ public class JwtService {
     @return int
     @throws BaseException
      */
-    public int getUserIdx() throws BaseException{
+    public String getUserId() throws BaseException {
         //1. JWT 추출
         String accessToken = getJwt();
-        if(accessToken == null || accessToken.length() == 0){
+        if (accessToken == null || accessToken.length() == 0) {
             throw new BaseException(EMPTY_JWT);
+        }
+        try {
+            accessToken = accessToken.split("Bearer ")[1];
+        } catch (Exception e) {
+            throw new BaseException(INVALID_JWT);
         }
 
         // 2. JWT parsing
         Jws<Claims> claims;
-        try{
+        try {
             claims = Jwts.parser()
                     .setSigningKey(Secret.JWT_SECRET_KEY)
                     .parseClaimsJws(accessToken);
@@ -69,7 +73,6 @@ public class JwtService {
         }
 
         // 3. userIdx 추출
-        return claims.getBody().get("userIdx",Integer.class);  // jwt 에서 userIdx를 추출합니다.
+        return claims.getBody().get("userId", String.class);  // jwt 에서 userIdx를 추출합니다.
     }
-
 }

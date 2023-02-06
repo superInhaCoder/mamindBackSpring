@@ -38,6 +38,13 @@ public enum BaseResponseStatus {
     POST_USERS_DISABLED_USER(false, 2020, "탈퇴한 회원입니다."),
 
 
+    // [POST] /order
+    POST_ORDER_EMPTY_RESTAURANTIDX(false, 2015, "음식점 idx를 입력해주세요."),
+    POST_ORDER_EMPTY_ORDERMENU(false, 2016, "메뉴를 입력해주세요."),
+
+
+
+
     /**
      * 3000 : Response 오류
      */
@@ -65,8 +72,8 @@ public enum BaseResponseStatus {
     PASSWORD_DECRYPTION_ERROR(false, 4012, "비밀번호 복호화에 실패하였습니다.");
 
 
-    // 5000 : 커스텀
-    // 6000 : 커스텀
+    // 5000 : 필요시 만들어서 쓰세요
+    // 6000 : 필요시 만들어서 쓰세요
 
 
     private final boolean isSuccess;

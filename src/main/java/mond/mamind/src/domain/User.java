@@ -1,7 +1,8 @@
-package mond.mamind.domain;
+package mond.mamind.src.domain;
 
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -15,6 +16,7 @@ public class User {
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Type(type = "uuid-char")
     private UUID id;
     @Column(length = 64)
     private String sub;

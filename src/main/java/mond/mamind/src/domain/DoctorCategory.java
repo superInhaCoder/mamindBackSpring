@@ -1,4 +1,4 @@
-package mond.mamind.domain;
+package mond.mamind.src.domain;
 
 import lombok.Data;
 import javax.persistence.*;
@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @Table
-public class GoalCategory {
+public class DoctorCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,7 +15,7 @@ public class GoalCategory {
     @Column(length = 64)
     private String subject;
 
-    public GoalCategory() {
+    public DoctorCategory() {
 
     }
 }

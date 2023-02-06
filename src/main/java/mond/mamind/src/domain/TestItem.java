@@ -1,21 +1,19 @@
-package mond.mamind.domain;
+package mond.mamind.src.domain;
 
 import lombok.Data;
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Data
 @Entity
 @Table
-public class Social {
+public class TestItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(length = 64)
-    private String platform;
-
-    public Social() {
-
-    }
+    private String content;
+    @ManyToOne
+    @JoinColumn(name = "test_id")
+    private Social social;
 }
