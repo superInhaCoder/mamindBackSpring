@@ -1,6 +1,9 @@
 package mond.mamind.src.domain;
 
+import com.sun.istack.NotNull;
+import lombok.Builder;
 import lombok.Data;
+import org.apache.tomcat.util.net.AprEndpoint;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
@@ -12,21 +15,17 @@ import java.util.UUID;
 @Entity
 @Table
 public class User {
-
     @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    @Type(type = "uuid-char")
-    private UUID id;
-    @Column(length = 64)
-    private String sub;
-    @Column(length = 64)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @NotNull
+    @Column(unique = true, nullable = false)
+    private String username;
+    @NotNull
+    @Column(nullable = false)
+    private String password;
     private String name;
-    @ManyToOne
-    @JoinColumn(name = "social_id")
-    private Social social;
     private LocalDateTime createDate;
-
     public User() {
 
     }

@@ -25,7 +25,7 @@ public class JwtService {
     @param userIdx
     @return String
      */
-    public String createJwt(UUID userIdx){
+    public String createJwt(Long userIdx){
         Date now = new Date();
         return Jwts.builder()
                 .setHeaderParam("type","jwt")

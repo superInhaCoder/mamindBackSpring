@@ -1,19 +1,25 @@
 package mond.mamind.src.model;
 
 import lombok.*;
-import mond.mamind.src.domain.Social;
 
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import java.time.LocalDateTime;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
-@Getter // 해당 클래스에 대한 접근자 생성
-@Setter // 해당 클래스에 대한 설정자 생성
-@AllArgsConstructor // 해당 클래스의 모든 멤버 변수(email, password, nickname, profileImage)를 받는 생성자를 생성
-@NoArgsConstructor(access = AccessLevel.PROTECTED)  // 해당 클래스의 파라미터가 없는 생성자를 생성, 접근제한자를 PROTECTED로 설정.
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class PostUserReq {
-    private String sub;
+    @NotEmpty
+    private String username;
+    @NotEmpty
+    private String password;
+    @NotEmpty
     private String name;
-    private String social;
+
+    @NotEmpty
+    @Email
+    private String email;
 }

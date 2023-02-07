@@ -23,7 +23,7 @@ public class Controller {
 
     @GetMapping("/first")
     public Map<String, Object> firstController(@RequestParam("id") UUID id) {
-        String jwt = jwtService.createJwt(UUID.randomUUID());
+        String jwt = jwtService.createJwt(1L);
         HashMap<String, Object> map = new HashMap<>();
         map.put("token", jwt);
         return map;

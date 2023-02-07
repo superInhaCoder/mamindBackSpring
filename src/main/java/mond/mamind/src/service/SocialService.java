@@ -1,32 +1,29 @@
 package mond.mamind.src.service;
 
 import mond.mamind.config.BaseException;
-import mond.mamind.src.domain.Social;
 import mond.mamind.src.domain.User;
 import mond.mamind.src.model.PostUserReq;
 import mond.mamind.src.model.PostUserRes;
 import mond.mamind.src.repository.SocialRepository;
 import mond.mamind.src.repository.UserRepository;
 import mond.mamind.utils.JwtService;
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
-import static mond.mamind.config.BaseResponseStatus.*;
+import static mond.mamind.config.BaseResponseStatus.DATABASE_ERROR;
 
 @Service
-public class UserService {
+@Transactional
+public class SocialService {
     private final JwtService jwtService;
     private final UserRepository userRepository;
     private final SocialRepository socialRepository;
 
     @Autowired
-    public UserService(JwtService jwtService, UserRepository userRepository, SocialRepository socialRepository) {
+    public SocialService(JwtService jwtService, UserRepository userRepository, SocialRepository socialRepository) {
         this.jwtService = jwtService;
         this.userRepository = userRepository;
         this.socialRepository = socialRepository;
@@ -35,16 +32,14 @@ public class UserService {
     public PostUserRes createUser(PostUserReq postUserReq) throws BaseException {
         try {
             User user = new User();
-            user.setUsername(postUserReq.getUsername());
-            user.setPassword(postUserReq.getPassword());
-            user.setName(postUserReq.getName());
             user.setCreateDate(LocalDateTime.now());
+            user.setName(postUserReq.getName());
+            user.setPassword(postUserReq.getPassword());
             userRepository.save(user);
             PostUserRes postUserRes = new PostUserRes();
             postUserRes.setToken(loginUser(user.getId()));
             return postUserRes;
         } catch (Exception exception) {
-            System.out.println(exception.getMessage());
             throw new BaseException(DATABASE_ERROR);
         }
     }

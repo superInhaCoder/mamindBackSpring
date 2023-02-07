@@ -7,16 +7,15 @@ import mond.mamind.src.model.PostUserRes;
 import mond.mamind.src.service.UserService;
 import mond.mamind.utils.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
 @RestController
+@RequestMapping("/user")
 public class UserController {
 
     private final JwtService jwtService;
@@ -28,13 +27,12 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/user/create")
-    public BaseResponse<PostUserRes> firstController(@RequestBody PostUserReq postUserReq) {
+    @PostMapping ("/create")
+    public BaseResponse<PostUserRes> userCreate(@Valid @RequestBody PostUserReq postUserReq) {
+        System.out.println(postUserReq.getPassword());
         try {
             PostUserRes postUserRes = userService.createUser(postUserReq);
-            postUserRes.setToken(jwtService.createJwt(postUserRes.getUserId()));
             return new BaseResponse<>(postUserRes);
-
         } catch (BaseException exception) {
             return new BaseResponse<>((exception.getStatus()));
         }
