@@ -33,8 +33,8 @@ public class Controller {
     public Map<String, Object> firstController(@RequestParam("id") String token) {
         HashMap<String, Object> map = new HashMap<>();
         try {
-            String uuid = jwtService.getUserId();
-            map.put("id", uuid);
+            Long id = jwtService.getUserId();
+            map.put("id", id);
         } catch (Exception BaseException) {
         }
         return map;
