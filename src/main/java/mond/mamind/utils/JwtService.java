@@ -7,6 +7,9 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -50,7 +53,7 @@ public class JwtService {
     @return int
     @throws BaseException
      */
-    public String getUserId() throws BaseException {
+    public Long getUserId() throws BaseException {
         //1. JWT 추출
         String accessToken = getJwt();
         if (accessToken == null || accessToken.length() == 0) {
@@ -73,6 +76,7 @@ public class JwtService {
         }
 
         // 3. userIdx 추출
-        return claims.getBody().get("userId", String.class);  // jwt 에서 userIdx를 추출합니다.
+        return claims.getBody().get("userId", Long.class);  // jwt 에서 userIdx를 추출합니다.
     }
+
 }
