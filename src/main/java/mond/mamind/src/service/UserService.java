@@ -1,47 +1,47 @@
 package mond.mamind.src.service;
 
+import lombok.RequiredArgsConstructor;
 import mond.mamind.config.BaseException;
-import mond.mamind.src.domain.Social;
 import mond.mamind.src.domain.User;
+import mond.mamind.src.model.PostLoginReq;
 import mond.mamind.src.model.PostUserReq;
 import mond.mamind.src.model.PostUserRes;
 import mond.mamind.src.repository.SocialRepository;
 import mond.mamind.src.repository.UserRepository;
+import mond.mamind.src.security.SecurityUser;
+import mond.mamind.src.security.SecurityUserDetailsService;
 import mond.mamind.utils.JwtService;
-import org.hibernate.exception.ConstraintViolationException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 import static mond.mamind.config.BaseResponseStatus.*;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
     private final JwtService jwtService;
     private final UserRepository userRepository;
-    private final SocialRepository socialRepository;
-
-    @Autowired
-    public UserService(JwtService jwtService, UserRepository userRepository, SocialRepository socialRepository) {
-        this.jwtService = jwtService;
-        this.userRepository = userRepository;
-        this.socialRepository = socialRepository;
-    }
+    private final SecurityUserDetailsService securityUserDetailsService;
+    private final PasswordEncoder bCryptPasswordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     public PostUserRes createUser(PostUserReq postUserReq) throws BaseException {
         try {
             User user = new User();
             user.setUsername(postUserReq.getUsername());
-            user.setPassword(postUserReq.getPassword());
+            user.setPassword(bCryptPasswordEncoder.encode(postUserReq.getPassword()));
             user.setName(postUserReq.getName());
             user.setCreateDate(LocalDateTime.now());
+            user.setRoll("ROLE_USER");
             userRepository.save(user);
             PostUserRes postUserRes = new PostUserRes();
-            postUserRes.setToken(loginUser(user.getId()));
+            postUserRes.setToken(jwtService.createJwt(user.getId()));
             return postUserRes;
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
@@ -49,8 +49,15 @@ public class UserService {
         }
     }
 
-    public String loginUser(Long userId) throws BaseException {
-        return jwtService.createJwt(userId);
+    public String loginUser(String username, String password) throws BaseException {
+        User user = userRepository.findByUsername(username);
+        if (user == null) {
+            throw new BaseException(FAILED_TO_LOGIN);
+        }
+        if (!passwordEncoder.matches(password, user.getPassword())) {
+            throw new BaseException(FAILED_TO_LOGIN);
+        }
+        return jwtService.createJwt(user.getId());
     }
 
     /*

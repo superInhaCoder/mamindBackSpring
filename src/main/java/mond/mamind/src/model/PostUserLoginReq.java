@@ -9,6 +9,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PostUserLoginRes {
+public class PostUserLoginReq {
     private String token;
 }

@@ -1,15 +1,11 @@
 package mond.mamind.src.domain;
 
 import com.sun.istack.NotNull;
-import lombok.Builder;
 import lombok.Data;
-import org.apache.tomcat.util.net.AprEndpoint;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Data
 @Entity
@@ -25,6 +21,7 @@ public class User {
     @Column(nullable = false)
     private String password;
     private String name;
+    private String roll;
     private LocalDateTime createDate;
     public User() {
 

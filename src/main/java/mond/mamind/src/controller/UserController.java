@@ -2,17 +2,18 @@ package mond.mamind.src.controller;
 
 import mond.mamind.config.BaseException;
 import mond.mamind.config.BaseResponse;
+import mond.mamind.src.model.PostLoginReq;
+import mond.mamind.src.model.PostLoginRes;
 import mond.mamind.src.model.PostUserReq;
 import mond.mamind.src.model.PostUserRes;
+import mond.mamind.src.security.SecurityUser;
 import mond.mamind.src.service.UserService;
 import mond.mamind.utils.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/user")
@@ -29,10 +30,21 @@ public class UserController {
 
     @PostMapping ("/create")
     public BaseResponse<PostUserRes> userCreate(@Valid @RequestBody PostUserReq postUserReq) {
-        System.out.println(postUserReq.getPassword());
+        System.out.println("dd");
         try {
             PostUserRes postUserRes = userService.createUser(postUserReq);
             return new BaseResponse<>(postUserRes);
+        } catch (BaseException exception) {
+            return new BaseResponse<>((exception.getStatus()));
+        }
+    }
+
+    @PostMapping ("/login")
+    public BaseResponse<PostLoginRes> test(@Valid @RequestBody PostLoginReq postUserReq) {
+        try {
+            String token = userService.loginUser(postUserReq.getUsername(), postUserReq.getPassword());
+            PostLoginRes PostLoginRes = new PostLoginRes(token);
+            return new BaseResponse<>(PostLoginRes);
         } catch (BaseException exception) {
             return new BaseResponse<>((exception.getStatus()));
         }

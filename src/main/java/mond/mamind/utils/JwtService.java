@@ -1,26 +1,19 @@
 package mond.mamind.utils;
 
 
+import io.jsonwebtoken.*;
 import mond.mamind.config.BaseException;
 import mond.mamind.config.secret.Secret;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
-import java.util.UUID;
 
 import static mond.mamind.config.BaseResponseStatus.*;
 
-@Service
+@Component
 public class JwtService {
 
     /*
@@ -28,7 +21,7 @@ public class JwtService {
     @param userIdx
     @return String
      */
-    public String createJwt(Long userIdx){
+    public String createJwt(Long userIdx) {
         Date now = new Date();
         return Jwts.builder()
                 .setHeaderParam("type","jwt")
@@ -78,5 +71,4 @@ public class JwtService {
         // 3. userIdx 추출
         return claims.getBody().get("userId", Long.class);  // jwt 에서 userIdx를 추출합니다.
     }
-
 }
