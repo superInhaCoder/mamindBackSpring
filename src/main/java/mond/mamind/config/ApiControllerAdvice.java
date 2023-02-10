@@ -24,15 +24,14 @@ public class ApiControllerAdvice {
         return new BaseResponse<Map<String, String>>(REQUEST_ERROR, errors);
     }
 
-    @ExceptionHandler(Exception.class)
-    public Exception e(Exception e){
-        System.out.println(e);
-        return e;
-    }
-
     @ExceptionHandler(BaseException.class)
     public BaseResponse<BaseException> baseException(BaseException e) {
         return new BaseResponse<>(e.getStatus());
     }
 
+    @ExceptionHandler(Exception.class)
+    public Exception e(Exception e){
+        System.out.println(e);
+        return e;
+    }
 }

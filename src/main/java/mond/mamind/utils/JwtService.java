@@ -55,7 +55,7 @@ public class JwtService {
         try {
             accessToken = accessToken.split("Bearer ")[1];
         } catch (Exception e) {
-            throw new BaseException(INVALID_JWT);
+            throw new BaseException(REQUEST_JWT_ERROR);
         }
 
         // 2. JWT parsing
