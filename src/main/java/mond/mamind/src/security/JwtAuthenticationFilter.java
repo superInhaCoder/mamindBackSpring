@@ -18,14 +18,16 @@ import org.springframework.web.servlet.HandlerExceptionResolver;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import static mond.mamind.config.BaseResponseStatus.*;
-
 
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
@@ -40,29 +42,39 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         this.resolver = resolver;
     }
 
-    // 나중에 provider로 바꾸면 좋음
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request)
+            throws ServletException {
+        String path = request.getRequestURI();
+        String[] exclude = {"/user/create", "/user/login"};
+        for (String ex : exclude) {
+            if (ex.equals(path)) return true;
+        }
+        return false;
+    }
+
+// 나중에 provider로 바꾸면 좋음
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-        if (!request.getRequestURI().equals("/user/create")) {
-            try {
-                Long userId = Long.valueOf(jwtService.getUserId());
-                UserDetails userDetails = customUserDetailsService.loadUserByUserid(userId);
+        String path = request.getRequestURI();
+        try {
+            Long userId = Long.valueOf(jwtService.getUserId());
+            UserDetails userDetails = customUserDetailsService.loadUserByUserid(userId);
 
-                UsernamePasswordAuthenticationToken auth =
-                        // 여기에서 super.setAuthenticated(true) 세팅
-                        new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(), userDetails.getAuthorities());
-                SecurityContextHolder.getContext().setAuthentication(auth);
-            } catch (BaseException exception) {
-                resolver.resolveException(request, response, null, exception);
-                return;
-            } catch (UsernameNotFoundException exception) {
-                resolver.resolveException(request, response, null, new BaseException(USER_NOT_FOUND));
-                return;
-            } catch (Exception exception) {
-                resolver.resolveException(request, response, null, exception);
-                return;
-            }
+            UsernamePasswordAuthenticationToken auth =
+                    // 여기에서 super.setAuthenticated(true) 세팅
+                    new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(), userDetails.getAuthorities());
+            SecurityContextHolder.getContext().setAuthentication(auth);
+        } catch (BaseException exception) {
+            resolver.resolveException(request, response, null, exception);
+            return;
+        } catch (UsernameNotFoundException exception) {
+            resolver.resolveException(request, response, null, new BaseException(USER_NOT_FOUND));
+            return;
+        } catch (Exception exception) {
+            resolver.resolveException(request, response, null, exception);
+            return;
         }
         filterChain.doFilter(request, response);
     }
