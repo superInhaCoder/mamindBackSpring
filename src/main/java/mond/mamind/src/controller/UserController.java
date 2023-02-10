@@ -1,5 +1,6 @@
 package mond.mamind.src.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import mond.mamind.config.BaseException;
 import mond.mamind.config.BaseResponse;
 import mond.mamind.src.model.PostLoginReq;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+@Slf4j
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -30,7 +32,7 @@ public class UserController {
 
     @PostMapping ("/create")
     public BaseResponse<PostUserRes> userCreate(@Valid @RequestBody PostUserReq postUserReq) {
-        System.out.println("dd");
+        log.warn("dd");
         try {
             PostUserRes postUserRes = userService.createUser(postUserReq);
             return new BaseResponse<>(postUserRes);
