@@ -25,10 +25,6 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
                        HttpServletResponse response,
                        AccessDeniedException e) throws IOException, ServletException {
 
-        // log.error("Forbidden!!! message : " + e.getMessage());
-        System.out.println("Forbidden!!! message : " + e.getMessage());
-
-        // response에 넣기
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.setStatus(HttpStatus.FORBIDDEN.value());
         try (OutputStream os = response.getOutputStream()) {

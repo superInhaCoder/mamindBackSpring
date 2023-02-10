@@ -25,11 +25,9 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
                          HttpServletResponse httpServletResponse,
                          AuthenticationException e) throws IOException, ServletException {
 
-        // log.error("UnAuthorizaed!!! message : " + e.getMessage());
-        System.out.println("UnAuthorizaed!!! message : " + e.getMessage());
-
         httpServletResponse.setContentType(MediaType.APPLICATION_JSON_VALUE);
         httpServletResponse.setStatus(HttpStatus.UNAUTHORIZED.value());
+
         try (OutputStream os = httpServletResponse.getOutputStream()) {
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.writeValue(os, new BaseResponse<>(new BaseException(UNAUTHORIZED).getStatus()));

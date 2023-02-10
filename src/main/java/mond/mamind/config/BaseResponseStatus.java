@@ -25,6 +25,8 @@ public enum BaseResponseStatus {
     UNAUTHORIZED(false, 2004, "인증되지 않은 요청입니다."),
     FORBIDDEN(false, 2005, "권한이 없습니다."),
 
+    USER_NOT_FOUND(false, 2006, "토큰에 해당하는 유저를 찾을 수 없습니다."),
+
     // users
     USERS_EMPTY_USER_ID(false, 2010, "유저 아이디 값을 확인해주세요."),
 
@@ -88,4 +90,6 @@ public enum BaseResponseStatus {
         this.code = code;
         this.message = message;
     }
+
+
 }

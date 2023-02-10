@@ -5,6 +5,7 @@ import io.jsonwebtoken.Jwt;
 import lombok.RequiredArgsConstructor;
 import mond.mamind.src.security.*;
 import mond.mamind.utils.JwtService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -15,6 +16,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.LogoutFilter;
+import org.springframework.web.servlet.HandlerExceptionResolver;
 
 @Configuration
 @EnableWebSecurity
@@ -27,6 +30,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final SecurityUserDetailsService securityUserDetailsService;
     private final JwtService jwtService;
 
+    @Qualifier("handlerExceptionResolver")
+    private final HandlerExceptionResolver handlerExceptionResolver;
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -34,8 +39,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() {
-        return new JwtAuthenticationFilter(securityUserDetailsService, jwtService);
+        return new JwtAuthenticationFilter(securityUserDetailsService, jwtService, handlerExceptionResolver);
     }
+
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
