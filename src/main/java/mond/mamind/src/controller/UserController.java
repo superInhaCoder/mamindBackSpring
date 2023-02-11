@@ -32,7 +32,6 @@ public class UserController {
 
     @PostMapping ("/create")
     public BaseResponse<PostUserRes> userCreate(@Valid @RequestBody PostUserReq postUserReq) {
-        log.warn("dd");
         try {
             PostUserRes postUserRes = userService.createUser(postUserReq);
             return new BaseResponse<>(postUserRes);

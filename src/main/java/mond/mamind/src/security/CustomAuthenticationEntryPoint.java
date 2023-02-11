@@ -1,6 +1,7 @@
 package mond.mamind.src.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import mond.mamind.config.BaseException;
 import mond.mamind.config.BaseResponse;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ import java.io.OutputStream;
 
 import static mond.mamind.config.BaseResponseStatus.*;
 
+@Slf4j
 @Component
 public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
@@ -24,7 +26,7 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
     public void commence(HttpServletRequest httpServletRequest,
                          HttpServletResponse httpServletResponse,
                          AuthenticationException e) throws IOException, ServletException {
-
+        log.error(UNAUTHORIZED.getMessage());
         httpServletResponse.setContentType(MediaType.APPLICATION_JSON_VALUE);
         httpServletResponse.setStatus(HttpStatus.UNAUTHORIZED.value());
 

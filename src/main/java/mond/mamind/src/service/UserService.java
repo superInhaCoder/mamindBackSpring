@@ -44,7 +44,6 @@ public class UserService {
             postUserRes.setToken(jwtService.createJwt(user.getId()));
             return postUserRes;
         } catch (Exception exception) {
-            System.out.println(exception.getMessage());
             throw new BaseException(DATABASE_ERROR);
         }
     }
