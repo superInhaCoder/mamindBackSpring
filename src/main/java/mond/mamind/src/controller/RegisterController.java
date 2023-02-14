@@ -29,7 +29,7 @@ public class RegisterController {
         this.userService = userService;
     }
 
-    @PostMapping ("/user/password")
+    @PostMapping ("/password")
     public BaseResponse<PostUserPasswordRes> postUserPassword(@Valid @RequestBody PostUserPasswordReq postUserPasswordReq) {
         try {
             PostUserPasswordRes postUserPasswordRes = userService.createUser(postUserPasswordReq);
@@ -38,4 +38,5 @@ public class RegisterController {
             return new BaseResponse<>((exception.getStatus()));
         }
     }
+
 }
