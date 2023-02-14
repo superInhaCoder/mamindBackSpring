@@ -28,6 +28,8 @@ public enum BaseResponseStatus {
 
     USER_NOT_FOUND(false, 2007, "토큰에 해당하는 유저를 찾을 수 없습니다."),
 
+    INVALID_TOKEN(false, 2007, "유효하지 않은 토큰입니다."),
+
     // users
     USERS_EMPTY_USER_ID(false, 2010, "유저 아이디 값을 확인해주세요."),
 
@@ -59,7 +61,8 @@ public enum BaseResponseStatus {
 
     // [POST] /users
     DUPLICATED_EMAIL(false, 3013, "중복된 이메일입니다."),
-    FAILED_TO_LOGIN(false,3014,"없는 아이디거나 비밀번호가 틀렸습니다."),
+    FAILED_TO_PASSWORD_LOGIN(false,3014,"없는 아이디거나 비밀번호가 틀렸습니다."),
+    FAILED_TO_GOOGLE_LOGIN(false,3015,"가입된 구글 계정이 없습니다."),
 
 
 

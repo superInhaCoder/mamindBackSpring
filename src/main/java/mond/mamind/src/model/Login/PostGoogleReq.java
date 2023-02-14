@@ -1,4 +1,4 @@
-package mond.mamind.src.model;
+package mond.mamind.src.model.Login;
 
 import lombok.*;
 
@@ -9,6 +9,7 @@ import javax.validation.constraints.NotEmpty;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class PostLoginRes {
-    private String token;
+public class PostGoogleReq {
+    @NotEmpty
+    private String idToken;
 }

@@ -1,10 +1,13 @@
 package mond.mamind.src.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import mond.mamind.config.BaseException;
+import mond.mamind.src.domain.Social;
 import mond.mamind.src.domain.User;
 import mond.mamind.src.model.Register.PostUserPasswordReq;
 import mond.mamind.src.model.Register.PostUserPasswordRes;
+import mond.mamind.src.repository.SocialRepository;
 import mond.mamind.src.repository.UserRepository;
 import mond.mamind.src.security.SecurityUserDetailsService;
 import mond.mamind.utils.JwtService;
@@ -15,11 +18,13 @@ import java.time.LocalDateTime;
 
 import static mond.mamind.config.BaseResponseStatus.*;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class UserService {
     private final JwtService jwtService;
     private final UserRepository userRepository;
+    private final SocialRepository socialRepository;
     private final SecurityUserDetailsService securityUserDetailsService;
     private final PasswordEncoder bCryptPasswordEncoder;
     private final PasswordEncoder passwordEncoder;
@@ -41,15 +46,24 @@ public class UserService {
         }
     }
 
-    public String loginUser(String username, String password) throws BaseException {
+    public String loginPassword(String username, String password) throws BaseException {
         User user = userRepository.findByUsername(username);
         if (user == null) {
-            throw new BaseException(FAILED_TO_LOGIN);
+            throw new BaseException(FAILED_TO_PASSWORD_LOGIN);
         }
         if (!passwordEncoder.matches(password, user.getPassword())) {
-            throw new BaseException(FAILED_TO_LOGIN);
+            throw new BaseException(FAILED_TO_PASSWORD_LOGIN);
         }
         return jwtService.createJwt(user.getId());
+    }
+
+    public String loginGoogle(String sub) throws BaseException {
+        Social social = socialRepository.findBySubAndSocialNum(sub, 0L);
+        if (social == null) {
+            throw new BaseException(FAILED_TO_GOOGLE_LOGIN);
+        }
+        log.info(social.getUser().getId().toString());
+        return jwtService.createJwt(social.getUser().getId());
     }
 
     /*

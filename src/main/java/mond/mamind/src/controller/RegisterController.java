@@ -38,5 +38,4 @@ public class RegisterController {
             return new BaseResponse<>((exception.getStatus()));
         }
     }
-
 }
