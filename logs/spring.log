@@ -4648,3 +4648,76 @@ org.springframework.web.bind.MethodArgumentNotValidException: Validation failed 
 2023-02-11 23:09:17.969  INFO 1276 --- [http-nio-127.0.0.1-8000-exec-2] o.s.w.s.DispatcherServlet                : Initializing Servlet 'dispatcherServlet'
 2023-02-11 23:09:17.971  INFO 1276 --- [http-nio-127.0.0.1-8000-exec-2] o.s.w.s.DispatcherServlet                : Completed initialization in 1 ms
 2023-02-11 23:09:18.148 ERROR 1276 --- [http-nio-127.0.0.1-8000-exec-2] m.m.c.ApiControllerAdvice                : 입력값을 확인해주세요.
+2023-02-11 23:29:36.029  WARN 1276 --- [HikariPool-1 housekeeper] c.z.h.p.HikariPool                       : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=56s434ms319µs500ns).
+2023-02-12 11:47:26.261  WARN 1276 --- [HikariPool-1 housekeeper] c.z.h.p.HikariPool                       : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5h16m46s825ms5µs600ns).
+2023-02-12 12:13:28.664  WARN 1276 --- [HikariPool-1 housekeeper] c.z.h.p.HikariPool                       : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=17m2s276ms282µs300ns).
+2023-02-12 14:45:37.993  WARN 1276 --- [HikariPool-1 housekeeper] c.z.h.p.HikariPool                       : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m7s156ms931µs).
+2023-02-12 16:41:22.957  WARN 1276 --- [HikariPool-1 housekeeper] c.z.h.p.HikariPool                       : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h50m44s889ms63µs700ns).
+2023-02-12 17:08:46.635  INFO 1276 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-02-12 17:08:46.662  INFO 1276 --- [SpringApplicationShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
+2023-02-12 17:08:46.741  INFO 1276 --- [SpringApplicationShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
+2023-02-14 17:24:24.757  INFO 6584 --- [main] m.m.MamindApplication                    : Starting MamindApplication using Java 19.0.1 on pseong with PID 6584 (C:\project\mamindBackSpring\build\classes\java\main started by pkseo in C:\project\mamindBackSpring)
+2023-02-14 17:24:24.769  INFO 6584 --- [main] m.m.MamindApplication                    : No active profile set, falling back to 1 default profile: "default"
+2023-02-14 17:24:26.270  INFO 6584 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-02-14 17:24:26.348  INFO 6584 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 69 ms. Found 2 JPA repository interfaces.
+2023-02-14 17:24:27.297  INFO 6584 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat initialized with port(s): 8000 (http)
+2023-02-14 17:24:27.337  INFO 6584 --- [main] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2023-02-14 17:24:27.338  INFO 6584 --- [main] o.a.c.c.StandardEngine                   : Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-02-14 17:24:27.584  INFO 6584 --- [main] o.a.c.c.C.[.[.[/]                        : Initializing Spring embedded WebApplicationContext
+2023-02-14 17:24:27.584  INFO 6584 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2747 ms
+2023-02-14 17:24:27.978  INFO 6584 --- [main] o.h.j.i.u.LogHelper                      : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-02-14 17:24:28.111  INFO 6584 --- [main] o.h.Version                              : HHH000412: Hibernate ORM core version 5.6.14.Final
+2023-02-14 17:24:28.541  INFO 6584 --- [main] o.h.a.c.Version                          : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-02-14 17:24:28.741  INFO 6584 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2023-02-14 17:24:29.459  INFO 6584 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2023-02-14 17:24:29.519  INFO 6584 --- [main] o.h.d.Dialect                            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2023-02-14 17:24:33.367  INFO 6584 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-02-14 17:24:33.386  INFO 6584 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-02-14 17:24:33.991  WARN 6584 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-02-14 17:24:34.978  INFO 6584 --- [main] o.s.s.w.DefaultSecurityFilterChain       : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@2468c0e4, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@49994a4, org.springframework.security.web.context.SecurityContextPersistenceFilter@63541cd4, org.springframework.security.web.header.HeaderWriterFilter@63c66980, org.springframework.web.filter.CorsFilter@1a82453, org.springframework.security.web.authentication.logout.LogoutFilter@f5b4ca6, mond.mamind.src.security.JwtAuthenticationFilter@3f5e64c9, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7a023e34, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7f9b851c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3df54fd5, org.springframework.security.web.session.SessionManagementFilter@6dc5e857, org.springframework.security.web.access.ExceptionTranslationFilter@2148849f, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@50eae15a]
+2023-02-14 17:24:35.361  INFO 6584 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat started on port(s): 8000 (http) with context path ''
+2023-02-14 17:24:35.379  INFO 6584 --- [main] m.m.MamindApplication                    : Started MamindApplication in 11.279 seconds (JVM running for 16.513)
+2023-02-14 17:25:05.572  INFO 6584 --- [http-nio-127.0.0.1-8000-exec-1] o.a.c.c.C.[.[.[/]                        : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-02-14 17:25:05.573  INFO 6584 --- [http-nio-127.0.0.1-8000-exec-1] o.s.w.s.DispatcherServlet                : Initializing Servlet 'dispatcherServlet'
+2023-02-14 17:25:05.575  INFO 6584 --- [http-nio-127.0.0.1-8000-exec-1] o.s.w.s.DispatcherServlet                : Completed initialization in 2 ms
+2023-02-14 17:25:05.924 ERROR 6584 --- [http-nio-127.0.0.1-8000-exec-1] m.m.c.ApiControllerAdvice                : 입력값을 확인해주세요.
+2023-02-14 17:26:23.864 TRACE 6584 --- [http-nio-127.0.0.1-8000-exec-2] o.h.t.d.s.BasicBinder                    : binding parameter [1] as [TIMESTAMP] - [2023-02-14T17:26:23.793592300]
+2023-02-14 17:26:23.866 TRACE 6584 --- [http-nio-127.0.0.1-8000-exec-2] o.h.t.d.s.BasicBinder                    : binding parameter [2] as [VARCHAR] - [박성욱]
+2023-02-14 17:26:23.866 TRACE 6584 --- [http-nio-127.0.0.1-8000-exec-2] o.h.t.d.s.BasicBinder                    : binding parameter [3] as [VARCHAR] - [$2a$10$Jqj7mWe16RHb4fdEm0VGxeUlhQk.qEKII8VqYKnNLtGlOPwKriKpq]
+2023-02-14 17:26:23.866 TRACE 6584 --- [http-nio-127.0.0.1-8000-exec-2] o.h.t.d.s.BasicBinder                    : binding parameter [4] as [VARCHAR] - [ROLE_USER]
+2023-02-14 17:26:23.867 TRACE 6584 --- [http-nio-127.0.0.1-8000-exec-2] o.h.t.d.s.BasicBinder                    : binding parameter [5] as [VARCHAR] - [pseong2]
+2023-02-14 17:26:34.085 ERROR 6584 --- [http-nio-127.0.0.1-8000-exec-3] m.m.c.ApiControllerAdvice                : null
+2023-02-14 17:28:09.048  INFO 6584 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-02-14 17:28:09.051  INFO 6584 --- [SpringApplicationShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
+2023-02-14 17:28:09.154  INFO 6584 --- [SpringApplicationShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
+2023-02-14 17:33:03.203  INFO 3928 --- [main] m.m.MamindApplication                    : Starting MamindApplication using Java 19.0.1 on pseong with PID 3928 (C:\project\mamindBackSpring\build\classes\java\main started by pkseo in C:\project\mamindBackSpring)
+2023-02-14 17:33:03.219  INFO 3928 --- [main] m.m.MamindApplication                    : No active profile set, falling back to 1 default profile: "default"
+2023-02-14 17:33:04.253  INFO 3928 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-02-14 17:33:04.327  INFO 3928 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 64 ms. Found 2 JPA repository interfaces.
+2023-02-14 17:33:05.019  INFO 3928 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat initialized with port(s): 8000 (http)
+2023-02-14 17:33:05.039  INFO 3928 --- [main] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2023-02-14 17:33:05.040  INFO 3928 --- [main] o.a.c.c.StandardEngine                   : Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-02-14 17:33:05.172  INFO 3928 --- [main] o.a.c.c.C.[.[.[/]                        : Initializing Spring embedded WebApplicationContext
+2023-02-14 17:33:05.172  INFO 3928 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1870 ms
+2023-02-14 17:33:05.358  INFO 3928 --- [main] o.h.j.i.u.LogHelper                      : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-02-14 17:33:05.417  INFO 3928 --- [main] o.h.Version                              : HHH000412: Hibernate ORM core version 5.6.14.Final
+2023-02-14 17:33:05.647  INFO 3928 --- [main] o.h.a.c.Version                          : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-02-14 17:33:05.763  INFO 3928 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2023-02-14 17:33:06.187  INFO 3928 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2023-02-14 17:33:06.218  INFO 3928 --- [main] o.h.d.Dialect                            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2023-02-14 17:33:09.841  INFO 3928 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-02-14 17:33:09.858  INFO 3928 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-02-14 17:33:10.487  WARN 3928 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-02-14 17:33:11.482  INFO 3928 --- [main] o.s.s.w.DefaultSecurityFilterChain       : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@106ac5f4, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5eed2edf, org.springframework.security.web.context.SecurityContextPersistenceFilter@260ccf0, org.springframework.security.web.header.HeaderWriterFilter@18ab513d, org.springframework.web.filter.CorsFilter@4552e288, org.springframework.security.web.authentication.logout.LogoutFilter@5c7d675c, mond.mamind.src.security.JwtAuthenticationFilter@2af31aba, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@363a09a2, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7cc7e441, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1a67bde5, org.springframework.security.web.session.SessionManagementFilter@6fe91918, org.springframework.security.web.access.ExceptionTranslationFilter@596d17f4, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@487bc2fe]
+2023-02-14 17:33:11.867  INFO 3928 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat started on port(s): 8000 (http) with context path ''
+2023-02-14 17:33:11.888  INFO 3928 --- [main] m.m.MamindApplication                    : Started MamindApplication in 9.356 seconds (JVM running for 11.298)
+2023-02-14 17:33:12.092  INFO 3928 --- [http-nio-127.0.0.1-8000-exec-1] o.a.c.c.C.[.[.[/]                        : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-02-14 17:33:12.092  INFO 3928 --- [http-nio-127.0.0.1-8000-exec-1] o.s.w.s.DispatcherServlet                : Initializing Servlet 'dispatcherServlet'
+2023-02-14 17:33:12.095  INFO 3928 --- [http-nio-127.0.0.1-8000-exec-1] o.s.w.s.DispatcherServlet                : Completed initialization in 3 ms
+2023-02-14 17:33:12.244 ERROR 3928 --- [http-nio-127.0.0.1-8000-exec-1] m.m.c.ApiControllerAdvice                : null
+2023-02-14 17:33:15.620 TRACE 3928 --- [http-nio-127.0.0.1-8000-exec-2] o.h.t.d.s.BasicBinder                    : binding parameter [1] as [TIMESTAMP] - [2023-02-14T17:33:15.514695500]
+2023-02-14 17:33:15.623 TRACE 3928 --- [http-nio-127.0.0.1-8000-exec-2] o.h.t.d.s.BasicBinder                    : binding parameter [2] as [VARCHAR] - [박성욱]
+2023-02-14 17:33:15.624 TRACE 3928 --- [http-nio-127.0.0.1-8000-exec-2] o.h.t.d.s.BasicBinder                    : binding parameter [3] as [VARCHAR] - [$2a$10$pdzIn1cttdWyuweTLDCgV.L0Z8xouIr3ULLLe.aObs2f14ilRS3IK]
+2023-02-14 17:33:15.624 TRACE 3928 --- [http-nio-127.0.0.1-8000-exec-2] o.h.t.d.s.BasicBinder                    : binding parameter [4] as [VARCHAR] - [ROLE_USER]
+2023-02-14 17:33:15.625 TRACE 3928 --- [http-nio-127.0.0.1-8000-exec-2] o.h.t.d.s.BasicBinder                    : binding parameter [5] as [VARCHAR] - [pseong2]
+2023-02-14 17:33:26.241 ERROR 3928 --- [http-nio-127.0.0.1-8000-exec-3] m.m.c.ApiControllerAdvice                : null

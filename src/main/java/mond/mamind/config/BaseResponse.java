@@ -9,7 +9,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import static mond.mamind.config.BaseResponseStatus.SUCCESS;
 
@@ -17,7 +17,7 @@ import static mond.mamind.config.BaseResponseStatus.SUCCESS;
 @AllArgsConstructor
 @JsonPropertyOrder({"isSuccess", "code", "message", "result"})
 public class BaseResponse<T> {//BaseResponse 객체를 사용할때 성공, 실패 경우
-    private final Date timestamp;
+    private final LocalDateTime timestamp;
     private final String path;
     @JsonProperty("isSuccess")
     private final Boolean isSuccess;
@@ -32,7 +32,7 @@ public class BaseResponse<T> {//BaseResponse 객체를 사용할때 성공, 실�
         this.message = SUCCESS.getMessage();
         this.code = SUCCESS.getCode();
         this.result = result;
-        this.timestamp  = new Date();
+        this.timestamp  = LocalDateTime.now();
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
         this.path = request.getRequestURI();
     }
@@ -42,7 +42,7 @@ public class BaseResponse<T> {//BaseResponse 객체를 사용할때 성공, 실�
         this.isSuccess = status.isSuccess();
         this.message = status.getMessage();
         this.code = status.getCode();
-        this.timestamp  = new Date();
+        this.timestamp  = LocalDateTime.now();
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
         this.path = request.getRequestURI();
     }
@@ -53,7 +53,7 @@ public class BaseResponse<T> {//BaseResponse 객체를 사용할때 성공, 실�
         this.message = status.getMessage();
         this.code = status.getCode();
         this.result = result;
-        this.timestamp  = new Date();
+        this.timestamp  = LocalDateTime.now();
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
         this.path = request.getRequestURI();
     }

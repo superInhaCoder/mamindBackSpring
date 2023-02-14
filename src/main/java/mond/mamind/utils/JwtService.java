@@ -9,6 +9,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+
 import java.util.Date;
 
 import static mond.mamind.config.BaseResponseStatus.*;
@@ -27,7 +28,7 @@ public class JwtService {
                 .setHeaderParam("type","jwt")
                 .claim("userId",userIdx)
                 .setIssuedAt(now)
-                .setExpiration(new Date(System.currentTimeMillis()+1000*10))//1*(1000*60*60*24*365)))
+                .setExpiration(new Date(System.currentTimeMillis()+1000*10)) //1*(1000*60*60*24*365)))
                 .signWith(SignatureAlgorithm.HS256, Secret.JWT_SECRET_KEY)
                 .compact();
     }
