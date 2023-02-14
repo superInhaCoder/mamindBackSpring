@@ -1,17 +1,15 @@
-package mond.mamind.src.model;
+package mond.mamind.src.model.Register;
 
 import lombok.*;
 
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class PostUserReq {
+public class PostUserPasswordReq {
     @NotEmpty
     private String username;
     @NotEmpty

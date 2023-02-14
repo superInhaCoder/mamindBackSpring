@@ -3,18 +3,11 @@ package mond.mamind.src.service;
 import lombok.RequiredArgsConstructor;
 import mond.mamind.config.BaseException;
 import mond.mamind.src.domain.User;
-import mond.mamind.src.model.PostLoginReq;
-import mond.mamind.src.model.PostUserReq;
-import mond.mamind.src.model.PostUserRes;
-import mond.mamind.src.repository.SocialRepository;
+import mond.mamind.src.model.Register.PostUserPasswordReq;
+import mond.mamind.src.model.Register.PostUserPasswordRes;
 import mond.mamind.src.repository.UserRepository;
-import mond.mamind.src.security.SecurityUser;
 import mond.mamind.src.security.SecurityUserDetailsService;
 import mond.mamind.utils.JwtService;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -31,18 +24,18 @@ public class UserService {
     private final PasswordEncoder bCryptPasswordEncoder;
     private final PasswordEncoder passwordEncoder;
 
-    public PostUserRes createUser(PostUserReq postUserReq) throws BaseException {
+    public PostUserPasswordRes createUser(PostUserPasswordReq postUserPasswordReq) throws BaseException {
         try {
             User user = new User();
-            user.setUsername(postUserReq.getUsername());
-            user.setPassword(bCryptPasswordEncoder.encode(postUserReq.getPassword()));
-            user.setName(postUserReq.getName());
+            user.setUsername(postUserPasswordReq.getUsername());
+            user.setPassword(bCryptPasswordEncoder.encode(postUserPasswordReq.getPassword()));
+            user.setName(postUserPasswordReq.getName());
             user.setCreateDate(LocalDateTime.now());
             user.setRoll("ROLE_USER");
             userRepository.save(user);
-            PostUserRes postUserRes = new PostUserRes();
-            postUserRes.setToken(jwtService.createJwt(user.getId()));
-            return postUserRes;
+            PostUserPasswordRes postUserPasswordRes = new PostUserPasswordRes();
+            postUserPasswordRes.setToken(jwtService.createJwt(user.getId()));
+            return postUserPasswordRes;
         } catch (Exception exception) {
             throw new BaseException(DATABASE_ERROR);
         }

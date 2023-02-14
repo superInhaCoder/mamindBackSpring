@@ -2,8 +2,8 @@ package mond.mamind.src.service;
 
 import mond.mamind.config.BaseException;
 import mond.mamind.src.domain.User;
-import mond.mamind.src.model.PostUserReq;
-import mond.mamind.src.model.PostUserRes;
+import mond.mamind.src.model.Register.PostUserPasswordReq;
+import mond.mamind.src.model.Register.PostUserPasswordRes;
 import mond.mamind.src.repository.SocialRepository;
 import mond.mamind.src.repository.UserRepository;
 import mond.mamind.utils.JwtService;
@@ -29,16 +29,16 @@ public class SocialService {
         this.socialRepository = socialRepository;
     }
 
-    public PostUserRes createUser(PostUserReq postUserReq) throws BaseException {
+    public PostUserPasswordRes createUser(PostUserPasswordReq postUserPasswordReq) throws BaseException {
         try {
             User user = new User();
             user.setCreateDate(LocalDateTime.now());
-            user.setName(postUserReq.getName());
-            user.setPassword(postUserReq.getPassword());
+            user.setName(postUserPasswordReq.getName());
+            user.setPassword(postUserPasswordReq.getPassword());
             userRepository.save(user);
-            PostUserRes postUserRes = new PostUserRes();
-            postUserRes.setToken(loginUser(user.getId()));
-            return postUserRes;
+            PostUserPasswordRes postUserPasswordRes = new PostUserPasswordRes();
+            postUserPasswordRes.setToken(loginUser(user.getId()));
+            return postUserPasswordRes;
         } catch (Exception exception) {
             throw new BaseException(DATABASE_ERROR);
         }
